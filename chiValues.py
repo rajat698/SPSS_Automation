@@ -1,7 +1,9 @@
 import docx
+import os
+import glob
 
-files = ['Symptom E2.docx', 'Symptom E3.docx',
-         'Symptom E4.docx', 'Symptom E5.docx']
+folder_path = './chiDocx'
+files = glob.glob(os.path.join(folder_path, '*.docx'))
 
 new_doc = docx.Document()
 
@@ -44,4 +46,4 @@ for i in files:
     table.rows[curr_row].cells[2].text = p
     curr_row += 1
 
-new_doc.save("ILoveKate.docx")
+new_doc.save("chiValues.docx")
