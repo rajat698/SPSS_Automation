@@ -2,10 +2,8 @@ import docx
 import os
 import glob
 
-folder_path = './kappaDocx'
+folder_path = './docx/kappaDocx'
 files = glob.glob(os.path.join(folder_path, '*.docx'))
-
-print(files )
 
 new_doc = docx.Document()
 
@@ -42,7 +40,7 @@ for i in files:
     doc = docx.Document(i)
     read(doc)
 
-    table.rows[curr_row].cells[0].text = i[12:len(i) - 5]
+    table.rows[curr_row].cells[0].text = i[17:len(i) - 5]
     table.rows[curr_row].cells[1].text = kappa
     table.rows[curr_row].cells[2].text = p
     curr_row += 1

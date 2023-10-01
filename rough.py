@@ -1,7 +1,1 @@
-import os
-import glob
-
-folder_path = './chiDocx'
-docx_files = glob.glob(os.path.join(folder_path, '*.docx'))
-
-print(docx_files)
+import pandas as pd from sklearn.ensemble import RandomForestRegressor from sklearn.model_selection import train_test_split from sklearn.metrics import mean_absolute_error # Load your historical stock prices data df = pd.read_csv('stock_prices.csv') # Split the data into training and test sets train_data, test_data = train_test_split(df, test_size=0.2, shuffle=False) # Train the Random Forest model on the training data rf = RandomForestRegressor() rf.fit(train_data) # Make predictions for 1 day, 1 week, and 1 month ahead import random # For 1 day ahead for i in range(1, 24): prediction = rf.predict([df.iloc[:i]]) df['prediction_1day'] = prediction print(f'Prediction for 1 day ahead: {mean_absolute_error(df['close'].iloc[-i:], prediction)}') # For 1 week ahead for i in range(1, 7): prediction = rf.predict([df.iloc[:i]]) df['prediction_1week'] = prediction print(f'Prediction for 1 week ahead: {mean_absolute_error(df['close'].iloc[-i:], prediction)}') # For 1 month ahead prediction = rf.predict([df.iloc[:73]]) df['prediction_1month'] = prediction print(f'Prediction for 1 month ahead: {mean_absolute_error(df['close'].iloc[-73:], prediction)}') 

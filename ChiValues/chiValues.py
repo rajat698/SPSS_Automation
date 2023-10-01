@@ -2,7 +2,7 @@ import docx
 import os
 import glob
 
-folder_path = './chiDocx'
+folder_path = './docx/chiDocx'
 files = glob.glob(os.path.join(folder_path, '*.docx'))
 
 new_doc = docx.Document()
@@ -41,7 +41,7 @@ for i in files:
     doc = docx.Document(i)
     read(doc)
 
-    table.rows[curr_row].cells[0].text = i[10:len(i) - 5]
+    table.rows[curr_row].cells[0].text = i[1:len(i) - 5]
     table.rows[curr_row].cells[1].text = chi
     table.rows[curr_row].cells[2].text = p
     curr_row += 1

@@ -2,7 +2,10 @@ import docx
 import os
 import glob
 
-def populate_coefficients_table(file):
+def populate_coefficients_table(file, write_doc):
+
+    # write_doc = docx.Document()
+
     # Access the Coefficients table
     readTable_coeff = file.tables[7]
 
@@ -72,15 +75,21 @@ def populate_coefficients_table(file):
                 except ValueError:
                     continue
                 
-                row_write.cells[column - 1].text = row_read.cells[4].text
+                beta = row_read.cells[4].text
+                if beta:
+                    beta = str(round(float(beta), 2))
+                
+                    if beta[0] == '0':
+                        beta = beta[1:]
+                        if len(beta) != 3:
+                            beta = beta + '0'
+                    elif beta[0:2] == '-0':
+                        beta = '-' + beta[2:]
+                        if len(beta) != 4:
+                            beta = beta + '0'
+                    
+                    # print(beta)
+
+                row_write.cells[column - 1].text = beta
+
                 row_write.cells[column].text = row_read.cells[6].text
-
-
-folder_path = './linearRegressionDocx'
-files = glob.glob(os.path.join(folder_path, '*.docx'))
-
-for i in files:
-    read_doc = docx.Document(i)
-    write_doc = docx.Document()
-    populate_coefficients_table(read_doc)
-    write_doc.save(f'{i[23:]}')
