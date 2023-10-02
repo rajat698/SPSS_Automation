@@ -1,10 +1,4 @@
-import docx
-import os
-import glob
-
 def populate_coefficients_table(file, write_doc):
-
-    # write_doc = docx.Document()
 
     # Access the Coefficients table
     readTable_coeff = file.tables[7]
